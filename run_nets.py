@@ -11,8 +11,8 @@ def run_net( ifmap_sram_size=1,
              array_h=32,
              array_w=32,
              data_flow = 'os',
-             topology_file = './topologies/yolo_v2.csv',
-             net_name='yolo_v2'
+             topology_file = './topologies/alexnet.csv',
+             net_name='alexnet'
             ):
 
     ifmap_sram_size *= 1024
@@ -53,6 +53,7 @@ def run_net( ifmap_sram_size=1,
         print("")
         print("Commencing run for " + name)
 
+        #==== get parameter value in topology file ====
         ifmap_h = int(elems[1])
         ifmap_w = int(elems[2])
 

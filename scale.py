@@ -1,3 +1,5 @@
+#!/usr/bin/python3.4
+
 import os
 import time
 import configparser as cp

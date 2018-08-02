@@ -1,0 +1,11 @@
+# Map to caffe model
+SCALE                  CAFFE																	Description
+Layer name              name (only model conv* layer)
+IFMAP Height       			n/a																		Used to calculate SRAM-based FIFO height
+IFMAP Width 						n/a																		Used to calculate SRAM-based FIFO width
+Filter Height           kernel_size
+Filter Width            kernel_size
+Channels            		Num Filter of previous layer      		
+Num Filter              num_output
+Strides                 stride
+
