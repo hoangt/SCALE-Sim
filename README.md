@@ -32,6 +32,7 @@ Given a convolution neural network topology and certain architecture parameters,
 SCALE sim is capable of estimating the following:
 
 * Run time in cycles
+* Average utilization
 * On-chip memory requirements
 * Off-chip interface bandwidth requirements
 
@@ -80,20 +81,25 @@ Getting started is simple! SCALE-Sim is completely written in python. At the mom
 * math
 * configparser
 * tqdm
+* absl-py
 
 
-### Custom Experiment
-
-* Fill in the config file, scale.cfg with proper values. 
+### Custome Experiment
+This experiment will run the default MLPERF_AlphaGoZero_32x32_os architechture contained inside scale.cfg. 
+It will also run alexnet as its network topology.
 * Run the command: ```python scale.py```
 * Wait for the run to finish
 
-The config file scale.cfg contains two sections, achitecture presets and network presets.  
+The config file inside configs contain achitecture presets.  
+the csv files inside toologies contain different networks
+
+In order to change a different arichtechture/network, create a new .cfg file inside ```cofigs``` and call a new network by running
+```python scale.py -arch_config=configs/eyeriss.cfg -network=topologies/yolo.csv```
 Here is sample of the config file.  
-![sample config](https://raw.githubusercontent.com/AnandS09/SCALE-Sim/master/images/config_example_single.png "sample config")    
+![sample config](https://raw.githubusercontent.com/AnandS09/SCALE-Sim/master/images/config_example.png "sample config")    
 Architecture presets are the variable parameters for SCALE-Sim, like array size, memory etc.  
 
-Network preset contains just one field for now, that is the path to the topology csv file.  
+The Network Topoplogy csv file contains the network that we want to test in our architechture.  
 SCALE-Sim accepts topology csv in the format shown below.  
 ![yolo_tiny topology](https://raw.githubusercontent.com/AnandS09/SCALE-Sim/master/images/yolo_tiny_csv.png "yolo_tiny.csv")
 
@@ -110,11 +116,16 @@ Here is an example output dumped to stdout when running Yolo tiny (whose configu
 Also, the simulator generates read write traces and summary logs at ```./outputs/<topology_name>```.
 There are three summary logs:
 
-* Layer wise runtime information.
-* Layer wise MAX DRAM bandwidth log.
-* Layer wise AVG DRAM bandwidth log.
+* Layer wise runtime and average utilization
+* Layer wise MAX DRAM bandwidth log
+* Layer wise AVG DRAM bandwidth log
+* Layer wise breakdown of data movement and compute cycles
 
 In addition cycle accurate SRAM/DRAM access logs are also dumped and could be accesses at ```./outputs/<topology_name>/layer_wise```
+
+### Detailed Documentation
+
+For detailed insights on working of SCALE-Sim, you can refer to this [paper](https://arxiv.org/abs/1811.02883)
 
 ## Contributing
 
@@ -126,7 +137,7 @@ Please send a [pull request](https://help.github.com/articles/creating-a-pull-re
 
 [Yuhao Zhu](http://yuhaozhu.com), University of Rochester
 
-Paul Whatmough, Arm Research, Boston, MA
+[Paul Whatmough](https://www.linkedin.com/in/paul-whatmough-2062729/), Arm Research, Boston, MA
 
 ## License
 
